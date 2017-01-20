@@ -14,7 +14,7 @@
 </c:if>
 
 <form action="loginCheck.html" method="post">
-用户名：
+新用户名：
 <input type="text" name="userName">
 <br>
 密码：
