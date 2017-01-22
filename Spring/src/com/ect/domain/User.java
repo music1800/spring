@@ -46,4 +46,8 @@ public class User {
 		this.lastVisit = lastVisit;
 	}
 	
+	public String toString() {
+		return "name:"+userName + "   credits:" + credits;
+	}
+	
 }
