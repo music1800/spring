@@ -43,5 +43,21 @@ public class MainTest {
 		
 		System.out.println("user:" + user);
 	}
+	
+	public abstract class Foo<T> {
+	    private Class<T> tClass;    
+
+	    public Foo(Class<T> tClass) {
+	        this.tClass = tClass;
+	    }
+	    //content
+	}
+
+	public class FooChild extends Foo<String> {
+	    public FooChild() {
+	        super(String.class);
+	    }
+	    //content
+	} 
 
 }

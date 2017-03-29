@@ -3,6 +3,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:task="http://www.springframework.org/schema/task" 
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:util="http://www.springframework.org/schema/util" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jaxws="http://cxf.apache.org/jaxws"
@@ -15,6 +16,8 @@
            http://www.springframework.org/schema/task/spring-task-3.0.xsd
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/p
+           http://www.springframework.org/schema/p/spring-p-3.0.xsd
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util-3.0.xsd
            http://cxf.apache.org/jaxws 
@@ -29,10 +32,42 @@
 
 		
 	<!-- 使支持resource等注解 -->
-	<context:component-scan base-package="com.ect.*" />
-
-	<import resource="db.context.xml"></import>
 	
+
+	
+	<bean id="greetingAdvice" class="SpringAop.GreetingBeforeAdvice"/>
+	<bean id="waiterTarget" class="SpringAop.WaiterImpl"/>
+	<bean id="sellerTarget" class="SpringAop.Seller"/>
+	<!--
+	<bean id="waiter" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="SpringAop.Waiter"
+		p:target-ref="target"
+		p:interceptorNames="greetingAdvice"
+	/>
+	<context:component-scan base-package="com.ect.*" />
+	
+	<import resource="db.context.xml"></import>
+	 -->
+	<bean id="greetingAdvisor" class="SpringAop.GreetingAdvisor" 
+		p:advice-ref="greetingAdvice"/>
+	
+	
+	<bean id="parent" abstract="true"  class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:interceptorNames="regexpAdvisor"
+		p:proxyTargetClass="true"/>
+	<bean id="waiter" parent="parent" p:target-ref="waiterTarget"/>
+	<bean id="seller" parent="parent" p:target-ref="sellerTarget"/>
+	
+	<bean id="regexpAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
+		p:advice-ref="greetingAdvice">
+		<property name="patterns">
+			<list>
+				<value>
+				.*greet.*
+				</value>
+			</list>
+		</property>
+	</bean>
 	
 	
 

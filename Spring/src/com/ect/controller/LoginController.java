@@ -28,7 +28,7 @@ public class LoginController {
 	public ModelAndView loginCheck(HttpServletRequest request){
 		boolean isValidUser = userService.hasMatchedUser(request.getParameter("userName"), request.getParameter("password"));
 		if(!isValidUser)
-			return new ModelAndView("login","error","ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+			return new ModelAndView("login","error","ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
 		else {
 			User user = userService.findUserByUserName(request.getParameter("userName"));
 			user.setLastIp(request.getLocalAddr());
