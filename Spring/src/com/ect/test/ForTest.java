@@ -17,6 +17,7 @@ import org.junit.Test;
 import SpringAop.ForumService;
 import SpringAop.ForumServiceInterface;
 import SpringAop.PerformanceHandler;
+import reflection.ChildDemo;
 import reflection.Demo;
 
 public class ForTest {
@@ -101,6 +102,11 @@ public class ForTest {
 			e.printStackTrace();
 		}
 				
+	}
+	
+	@Test
+	public void Ref(){
+		ChildDemo demo = new ChildDemo(12,"212");
 	}
 	
 

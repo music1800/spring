@@ -75,8 +75,16 @@ public class AopTest {
 	}
 	
 	@Test
-	public void testAopRegexp(){
-		
+	public void testAspectj(){
+		Waiter waiter  = (Waiter)context.getBean("nativeWaiter");
+		waiter.greetTo("LeeGen");
+		waiter.serveTo("LeeGen");
+	}
+	
+	@Test
+	public void testNew(){
+		String string = "123.00";
+		//System.out.println((Double) string);
 	}
 
 }

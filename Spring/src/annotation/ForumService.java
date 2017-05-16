@@ -1,8 +1,8 @@
-package SpringAop;
+package annotation;
 
 import annotation.NeedTest;
 
-public class ForumService implements ForumServiceInterface{
+public class ForumService{
 	@NeedTest(true)
 	public void deleteUser(int id) {
 		System.out.println("delete user " + id);
